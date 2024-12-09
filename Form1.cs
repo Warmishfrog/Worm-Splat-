@@ -49,8 +49,12 @@ namespace WormSplatter
 
             public virtual void Splat(int SplatVal) //takes integer (percent)
             {
-                Length -= (Length * SplatVal / 100);// e.g. |100% - (100% * 50 / 100) = 50%|
-                System.Diagnostics.Debug.WriteLine("Splat Value: " + SplatVal);
+                if (SplatVal < 0 || SplatVal > 100) return;
+                else 
+                {
+                    Length -= (Length * SplatVal / 100);// e.g. |100% - (100% * 50 / 100) = 50%|
+                    System.Diagnostics.Debug.WriteLine("Splat Value: " + SplatVal);
+                }
             }
         }
 
@@ -179,7 +183,7 @@ namespace WormSplatter
             splatButton.Click += (s, args) =>
             {
 
-                int RandNum = new Random().Next(0, 81);//random number between 0 and 80 // 0<y<81
+                int RandNum = new Random().Next(0, 80);//random number between 0 and 80 // 0<y<80
                 switch (worm)
                 {
                     case RedWorm rw:
