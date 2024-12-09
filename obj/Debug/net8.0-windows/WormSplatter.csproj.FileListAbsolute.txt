@@ -14,3 +14,4 @@ C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\refint\WormSpl
 C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.pdb
 C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.genruntimeconfig.cache
 C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\ref\WormSplatter.dll
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.sourcelink.json
