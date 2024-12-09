@@ -1,9 +1,9 @@
 # WormSplatter
  
-This is a programming exercise on Splatting Worms in C#
-The project makes use of the C# graphical GUI class library included as a part of Microsoft .NET 
-The project achieves the following features.
+This is a programming exercise on Splatting Worms in C#.
+The project makes use of "Window Forms", the graphical GUI class library included as a part of Microsoft .NET 
 
+The project achieves the following features:
 •Each worm has a length value that is initialised to a value of 100%
 •Each worm has a Splat() method that takes an integer parameter between 0 and 100.
 •When Splat() is called the length of the worm is reduced by a percentage of the worm's current length.
