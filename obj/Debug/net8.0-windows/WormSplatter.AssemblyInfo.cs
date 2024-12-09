@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WormSplatter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f709956ecf33bcb60b8a570b862f28f650d41f7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9bf2786b1f7a8ae0373392877828e41a40528e3")]
 [assembly: System.Reflection.AssemblyProductAttribute("WormSplatter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WormSplatter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

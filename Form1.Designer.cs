@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             textBox1 = new TextBox();
+            button1 = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -47,11 +48,24 @@
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.AutoSize = true;
+            button1.Location = new Point(734, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(54, 25);
+            button1.TabIndex = 1;
+            button1.Text = "Reset";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(textBox1);
             Name = "Form1";
             Text = "Worm Splat";
@@ -62,5 +76,6 @@
         #endregion
 
         private TextBox textBox1;
+        private Button button1;
     }
 }

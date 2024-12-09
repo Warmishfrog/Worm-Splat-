@@ -5,35 +5,28 @@ namespace WormSplatter
 {
     public partial class Form1 : Form
     {
-        
         private RedWorm redWorm;
         private BlueWorm blueWorm;
         private GreenWorm greenWorm;
         private GreyWorm greyWorm;
         //*/
-
         public Form1()
         {
-            InitializeComponent();  
-            
+            InitializeComponent();
             CreateWormInterface(); //create the worm interface
-
-            
+              
+            //needed to prevent constructor being grumpy about nullable objects
             redWorm = new RedWorm();
             blueWorm = new BlueWorm();
             greenWorm = new GreenWorm();
             greyWorm = new GreyWorm();
-            //Worm[] worms = { redWorm, blueWorm, greenWorm, greyWorm };
             //*/
-
-
         }
 
-        abstract class Worm //Abstraction to hide non-descript worms
-        {          
-
+        abstract class Worm //Abstraction to prevent non-descript worms from being created
+        {
             private int length = 100; //initial value
-            public int Length //encapsulation
+            public int Length //encapsulation to protect the length value // worms inherit length
             {
                 get //read
                 {
@@ -41,9 +34,9 @@ namespace WormSplatter
                 }
                 set //write
                 {
-                    if (value < 0)
+                    if (value < DeadValue) //
                     {
-                        length = 0;
+                        length = DeadValue;
                     }
                     else
                     {
@@ -51,181 +44,77 @@ namespace WormSplatter
                     }
                 }
             }
-            public virtual void Splat() //polymorphism :)
-            {
-                int RandNum = new Random().Next(0, 81); //random number between 0 and 80
-                Length -= RandNum;
-                System.Diagnostics.Debug.WriteLine("Random Number Generated: " + RandNum);
-                System.Diagnostics.Debug.WriteLine("New Length: " + Length);
-            }
 
+            public abstract int DeadValue { get; } //worm types can inherit but then override to allow for a protected inherited value (length) //example of inheritance, encapsulation and abstraction
+
+            public virtual void Splat(int SplatVal) //takes integer (percent)
+            {
+                Length -= (Length * SplatVal / 100);// e.g. |100% - (100% * 50 / 100) = 50%|
+                System.Diagnostics.Debug.WriteLine("Splat Value: " + SplatVal);
+            }
         }
 
         class RedWorm : Worm //70
         {
-            private int length = 100;
-            public int Length
-            {
-                get //read
-                {
-                    return length;
-                }
-                set //write
-                {
-                    if (value < 70)
-                    {
-                        length = 70;
-                    }
-                    else
-                    {
-                        length = value;
-                    }
-                }
-            }
-
-            public override void Splat()
-            {
-                int RandNum = new Random().Next(0, 81);
-                Length -= RandNum; //random number between 0 and 80
-                System.Diagnostics.Debug.WriteLine("Random Number Generated: " + RandNum);
-            }
-
-
+            public override int DeadValue => 70;
         }
 
         class BlueWorm : Worm //10
         {
-            private int length = 100;
-            public int Length
-            {
-                get //read
-                {
-                    return length;
-                }
-                set //write
-                {
-                    if (value < 10)
-                    {
-                        length = 10;
-                    }
-                    else
-                    {
-                        length = value;
-                    }
-                }
-            }
-            public override void Splat()
-            {
-                int RandNum = new Random().Next(0, 81);
-                Length -= RandNum; //random number between 0 and 80
-                System.Diagnostics.Debug.WriteLine("Random Number Generated: " + RandNum);
-            }
+            public override int DeadValue => 10;
         }
 
         class GreenWorm : Worm//50
         {
-            private int length = 100;
-            public int Length
-            {
-                get //read
-                {
-                    return length;
-                }
-                set //write
-                {
-                    if (value < 50)
-                    {
-                        length = 50;
-                    }
-                    else
-                    {
-                        length = value;
-                    }
-                }
-            }
-            public override void Splat()
-            {
-                int RandNum = new Random().Next(0, 81);
-                Length -= RandNum; //random number between 0 and 80
-                System.Diagnostics.Debug.WriteLine("Random Number Generated: " + RandNum);
-            }
+            public override int DeadValue => 50;
         }
 
         class GreyWorm : Worm //20
         {
-            private int length = 100;
-            public int Length
-            {
-                get //read
-                {
-                    return length;
-                }
-                set //write
-                {
-                    if (value < 20)
-                    {
-                        length = 20;
-                    }
-                    else
-                    {
-                        length = value;
-                    }
-                }
-            }
-            public override void Splat()
-            {
-                int RandNum = new Random().Next(0, 81);
-                Length -= RandNum; //random number between 0 and 80
-                System.Diagnostics.Debug.WriteLine("Random Number Generated: " + RandNum);
-            }
+            public override int DeadValue => 20;
         }
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        public void button1_Click(object sender, EventArgs e)
-        {
-            redWorm.Splat();
-            System.Diagnostics.Debug.WriteLine("New Length: " + redWorm.Length);
-
+            //title
         }
 
         private void CreateWormInterface()
         {
-            List<Worm> worms = new List<Worm>();
+            List<Worm> wormsL = new List<Worm>(); //I wanted to implement it dynamically instead of hardcode to allow it to be easily adjustable and modular
+            Type[] wormTypes = new Type[] { typeof(RedWorm), typeof(BlueWorm), typeof(GreenWorm), typeof(GreyWorm) }; //worm colour array
 
-            for (int i = 0; i < 5; i++)
+            foreach (Type wormType in wormTypes) //this makes it so that they are display in groups of colour as opposed to sequence of colour
             {
-                worms.Add(new RedWorm());
-                worms.Add(new BlueWorm());
-                worms.Add(new GreenWorm());
-                worms.Add(new GreyWorm());
+                for (int i = 0; i < 5; i++)
+                {
+                    Worm wormColour = (Worm)Activator.CreateInstance(wormType); //!--converting null literal or possible null value to non nullable type
+                    wormsL.Add(wormColour);
+                }
             }
 
             int xGap = 150;
             int yGap = 100;
             int columns = 5;
 
-            for (int i = 0; i < worms.Count; i++)
+            for (int i = 0; i < wormsL.Count; i++)
             {
-                int row = i / columns;  
-                int column = i % columns; 
-                int xOffset = column * xGap; 
-                int yOffset = row * yGap; 
+                int row = i / columns;
+                int column = i % columns;
+                int xOffset = column * xGap;
+                int yOffset = row * yGap;
 
-                CreateWormPanel(worms[i], xOffset, yOffset);
+                CreateWormPanel(wormsL[i], xOffset, yOffset);
             }
         }
 
-        private void CreateWormPanel(Worm worm, int xOffset, int yOffset)
+        private void CreateWormPanel(Worm worm, int xOffset, int yOffset) //individual worm modules makes it easer to create one and reproduce it
         {
             Panel wPanel = new Panel();
             this.Controls.Add(wPanel);
 
             wPanel.Location = new Point(50 + xOffset, 50 + yOffset);
+            wPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             wPanel.AutoSize = true;
             wPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             wPanel.BorderStyle = BorderStyle.FixedSingle;
@@ -233,7 +122,7 @@ namespace WormSplatter
             // Worm graphic setup
             TextBox wIcon = new TextBox();
             wPanel.Controls.Add(wIcon);
-            wIcon.Text = "~";                  
+            wIcon.Text = "~";
             wIcon.Font = new Font(wIcon.Font.FontFamily, 20, FontStyle.Bold);
             wIcon.Location = new Point(14, 0);
             wIcon.Size = new Size(50, 5);
@@ -242,7 +131,7 @@ namespace WormSplatter
             wIcon.BackColor = SystemColors.Control;
             wIcon.ReadOnly = true;
 
-            switch (worm) //chooses worm colour based on input 
+            switch (worm) //colour based on case 
             {
                 case RedWorm:
                     wIcon.ForeColor = System.Drawing.Color.Red;
@@ -257,10 +146,8 @@ namespace WormSplatter
                     wIcon.ForeColor = System.Drawing.Color.Gray;
                     break;
                 default:
-
                     break;
             }
-
 
             // length display
             TextBox wLength = new TextBox();
@@ -268,9 +155,10 @@ namespace WormSplatter
             wLength.Text = worm switch //switch case changes the displayed length text based on the worm colour
             {
                 RedWorm rw => rw.Length.ToString(),
-                BlueWorm bw => bw.Length.ToString(), 
+                BlueWorm bw => bw.Length.ToString(),
                 GreenWorm gw => gw.Length.ToString(),
-                GreyWorm gwm => gwm.Length.ToString(), 
+                GreyWorm gwm => gwm.Length.ToString(),
+
                 _ => "n/a"
             };
             wLength.Location = new Point(14, 40);
@@ -290,32 +178,53 @@ namespace WormSplatter
             //button logic
             splatButton.Click += (s, args) =>
             {
+
+                int RandNum = new Random().Next(0, 81);//random number between 0 and 80 // 0<y<81
                 switch (worm)
                 {
                     case RedWorm rw:
-                        rw.Splat();
+                        rw.Splat(RandNum);
                         wLength.Text = rw.Length.ToString();
+                        if (rw.Length <= rw.DeadValue) wIcon.Text = "X"; //
+
                         break;
 
                     case BlueWorm bw:
-                        bw.Splat();
+                        bw.Splat(RandNum);
                         wLength.Text = bw.Length.ToString();
+                        if (bw.Length <= bw.DeadValue) wIcon.Text = "X"; //
                         break;
 
                     case GreenWorm gw:
-                        gw.Splat();
-                        wLength.Text = gw.Length.ToString(); 
+                        gw.Splat(RandNum);
+                        wLength.Text = gw.Length.ToString();
+                        if (gw.Length <= gw.DeadValue) wIcon.Text = "X"; //
                         break;
 
                     case GreyWorm gwm:
-                        gwm.Splat();
+                        gwm.Splat(RandNum);
                         wLength.Text = gwm.Length.ToString();
+                        if (gwm.Length <= gwm.DeadValue) wIcon.Text = "X"; //
                         break;
 
-                    default:                        
+                    default:
                         break;
                 }
             };
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //PAGE RESET
+            this.Controls.Clear(); //delete literally everything
+
+            InitializeComponent();           
+            CreateWormInterface();
+
+            redWorm = new RedWorm();
+            blueWorm = new BlueWorm();
+            greenWorm = new GreenWorm();
+            greyWorm = new GreyWorm();
         }
     }
 }
