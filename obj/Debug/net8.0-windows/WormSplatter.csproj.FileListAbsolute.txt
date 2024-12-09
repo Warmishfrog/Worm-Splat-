@@ -1,0 +1,16 @@
+C:\Users\warmi\source\repos\WormSplatter\bin\Debug\net8.0-windows\WormSplatter.exe
+C:\Users\warmi\source\repos\WormSplatter\bin\Debug\net8.0-windows\WormSplatter.deps.json
+C:\Users\warmi\source\repos\WormSplatter\bin\Debug\net8.0-windows\WormSplatter.runtimeconfig.json
+C:\Users\warmi\source\repos\WormSplatter\bin\Debug\net8.0-windows\WormSplatter.dll
+C:\Users\warmi\source\repos\WormSplatter\bin\Debug\net8.0-windows\WormSplatter.pdb
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.Form1.resources
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.csproj.GenerateResource.cache
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.AssemblyInfoInputs.cache
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.AssemblyInfo.cs
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.csproj.CoreCompileInputs.cache
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.dll
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\refint\WormSplatter.dll
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.pdb
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\WormSplatter.genruntimeconfig.cache
+C:\Users\warmi\source\repos\WormSplatter\obj\Debug\net8.0-windows\ref\WormSplatter.dll
